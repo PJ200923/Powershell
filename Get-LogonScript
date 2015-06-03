@@ -1,0 +1,8 @@
+<#
+Searches AD for all users whose logon script is equal to "marketing.bat" and exports their username and logonscript name
+to a CSV file
+#>
+
+Get-ADUser -properties scriptpath, homedrive, homedirectory -filter {scriptpath -eq 'marketing.bat'} | 
+Select-Object Name, scriptpath | Sort-Object Name | Export-Csv "%PATH%.csv" -notype
+
